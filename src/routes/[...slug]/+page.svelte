@@ -2,7 +2,7 @@
 	export let data;
 </script>
 
-<pre>{JSON.stringify(data, null, 2)}</pre>
+<!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->
 <main class="p-4 md:p-6">
 	<div
 		class="max-w-3xl mx-auto border rounded-lg shadow-sm variant-glass-tertiary bg-card text-card-foreground"

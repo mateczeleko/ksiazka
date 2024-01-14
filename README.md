@@ -1,39 +1,51 @@
-# create-svelte
+# ksiazka
+# Instrukcja Uruchomienia Projektu
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+## Sprawdzenie Serwera Bazy Danych MySQL
 
-## Creating a project
+1. **Sprawdzenie Stanu Serwera MySQL**
+   Upewnij się, że serwer bazy danych MySQL jest uruchomiony. Można to zrobić za pomocą narzędzi zarządzania serwerem lub sprawdzając usługi systemowe.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Konfiguracja Pliku .env
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+2. **Ustawienie Pliku .env**
+   Plik `.env` powinien zawierać `connection string` do bazy danych MySQL. Upewnij się, że jest on sformatowany zgodnie z poniższym wzorcem:
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+DATABASE_URL="mysql://root:q1w2e3r4@localhost:3306/mydb"
 
-## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Zastąp `root`, `q1w2e3r4`, `localhost` i `mydb` odpowiednimi danymi dostępu do bazy danych.
 
-```bash
+## Inicjalizacja Prisma ORM
+
+3. **Inicjalizacja Prisma ORM**
+Aby zainicjalizować Prisma ORM, wykonaj w terminalu następujące polecenie:
+
+npx prisma generate
+
+## Uruchomienie Skryptu Seed.js
+
+**opcjonalnie**
+   Jeśli wprowadzono zmiany w modelach danych Prisma, zastosuj migracje, aby zaktualizować schemat bazy danych. Użyj polecenia:
+
+   npx prisma migrate dev
+
+To polecenie powinno być wykonane przed uruchomieniem skryptu `seed.js`, zwłaszcza gdy uruchamiasz projekt po raz pierwszy lub dokonano zmian w schemacie bazy danych.
+
+
+4. **Uruchomienie Skryptu Seed.js**
+W katalogu `prisma` znajduje się plik `seed.js`. Uruchom go, wykonując polecenie:
+
+npx prisma db seed
+
+## Startowanie Development Server
+
+5. **Uruchomienie Serwera Deweloperskiego**
+Aby uruchomić serwer deweloperski, wykonaj polecenie:
+
 npm run dev
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+Po wykonaniu powyższych kroków, aplikacja powinna być uruchomiona i gotowa do pracy.
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-# ksiazka
+Uwaga!
+Testowane na MacOS, gdzie wybiera się kategorię przy dodawaniu przytrzymując command. Mozliwe, ze trzeba wciskać Ctrl

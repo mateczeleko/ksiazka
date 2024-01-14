@@ -15,3 +15,11 @@ export async function load() {
     });
     return {categories};
 };
+export const actions = {
+    default: async ({request}) => {
+        const data = await request.formData()
+        const id = parseInt(data.get('id'))
+        console.log(id);
+        await db.recipe.delete({where:{id}})
+    }
+};

@@ -21,7 +21,7 @@ model Recipe {
   description       String              @db.VarChar(255)
   instructions      String              @db.VarChar(2000)
   categoryId        Int                 // Foreign key for Category
-  category          Category?           @relation(fields: [categoryId], references: [id])
+  category          Category?           @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   recipeIngredients Recipe_Ingredient[]
 
   @@map("Recipe")
@@ -38,8 +38,8 @@ model Ingredient {
 model Recipe_Ingredient {
   recipeId     Int
   ingredientId Int
-  recipe       Recipe     @relation(fields: [recipeId], references: [id])
-  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  recipe       Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
 
   @@id([recipeId, ingredientId])
   @@map("Recipe_Ingredient")
