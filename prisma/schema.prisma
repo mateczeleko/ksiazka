@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(40)
+  recipes   Recipe[]  // One Category can have many Recipes
+
+  @@map("Category")
+}
+
+model Recipe {
+  id                Int                 @id @default(autoincrement())
+  title             String              @db.VarChar(40)
+  description       String              @db.VarChar(255)
+  instructions      String              @db.VarChar(2000)
+  categoryId        Int                 // Foreign key for Category
+  category          Category?           @relation(fields: [categoryId], references: [id])
+  recipeIngredients Recipe_Ingredient[]
+
+  @@map("Recipe")
+}
+
+model Ingredient {
+  id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(40)
+  recipeIngredients Recipe_Ingredient[]
+
+  @@map("Ingredient")
+}
+
+model Recipe_Ingredient {
+  recipeId     Int
+  ingredientId Int
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+
+  @@id([recipeId, ingredientId])
+  @@map("Recipe_Ingredient")
+}
